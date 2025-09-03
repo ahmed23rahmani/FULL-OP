@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "server-test-local.js",
+      "src": "server-vercel.js",
       "use": "@vercel/node"
     },
     {
@@ -13,7 +13,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/server-test-local.js"
+      "dest": "/server-vercel.js"
     },
     {
       "src": "/admin",
@@ -29,7 +29,6 @@
     }
   ],
   "env": {
-    "NODE_ENV": "production",
-    "PORT": "5000"
+    "NODE_ENV": "production"
   }
 }
