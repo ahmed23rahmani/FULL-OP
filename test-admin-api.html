@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Admin</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { color: green; }
+        .error { color: red; }
+        button { margin: 5px; padding: 10px; cursor: pointer; }
+        pre { background: #f5f5f5; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test des Routes API Admin</h1>
+    
+    <div class="test-section">
+        <h3>📊 Test des Catégories</h3>
+        <button onclick="testGetCategories()">Récupérer les catégories</button>
+        <button onclick="testAddCategory()">Ajouter une catégorie</button>
+        <button onclick="testUpdateCategory()">Modifier une catégorie</button>
+        <button onclick="testDeleteCategory()">Supprimer une catégorie</button>
+        <div id="categories-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>📦 Test des Produits</h3>
+        <button onclick="testGetProducts()">Récupérer les produits</button>
+        <button onclick="testAddProduct()">Ajouter un produit</button>
+        <button onclick="testUpdateProduct()">Modifier un produit</button>
+        <button onclick="testDeleteProduct()">Supprimer un produit</button>
+        <div id="products-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>📋 Test des Commandes</h3>
+        <button onclick="testGetOrders()">Récupérer les commandes</button>
+        <button onclick="testUpdateOrderStatus()">Mettre à jour le statut</button>
+        <button onclick="testDeleteOrder()">Supprimer une commande</button>
+        <div id="orders-result"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        
+        async function apiRequest(endpoint, options = {}) {
+            try {
+                const response = await fetch(`${API_BASE}${endpoint}`, {
+                    method: options.method || 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    body: options.body
+                });
+                
+                const data = await response.json();
+                return { success: response.ok, data, status: response.status };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+
+        function showResult(elementId, result, isSuccess = true) {
+            const element = document.getElementById(elementId);
+            const className = isSuccess ? 'success' : 'error';
+            element.innerHTML = `<div class="${className}"><pre>${JSON.stringify(result, null, 2)}</pre></div>`;
+        }
+
+        // Test des catégories
+        async function testGetCategories() {
+            const result = await apiRequest('/categories');
+            showResult('categories-result', result, result.success);
+        }
+
+        async function testAddCategory() {
+            const result = await apiRequest('/categories', {
+                method: 'POST',
+                body: JSON.stringify({
+                    name: 'Test Catégorie',
+                    description: 'Description de test'
+                })
+            });
+            showResult('categories-result', result, result.success);
+        }
+
+        async function testUpdateCategory() {
+            const result = await apiRequest('/categories/1', {
+                method: 'PUT',
+                body: JSON.stringify({
+                    name: 'Chaussures Modifiées',
+                    description: 'Description modifiée'
+                })
+            });
+            showResult('categories-result', result, result.success);
+        }
+
+        async function testDeleteCategory() {
+            const result = await apiRequest('/categories/2', {
+                method: 'DELETE'
+            });
+            showResult('categories-result', result, result.success);
+        }
+
+        // Test des produits
+        async function testGetProducts() {
+            const result = await apiRequest('/products');
+            showResult('products-result', result, result.success);
+        }
+
+        async function testAddProduct() {
+            const result = await apiRequest('/products', {
+                method: 'POST',
+                body: JSON.stringify({
+                    name: 'Produit Test',
+                    category: 'chaussures',
+                    price: 5000,
+                    description: 'Description de test'
+                })
+            });
+            showResult('products-result', result, result.success);
+        }
+
+        async function testUpdateProduct() {
+            const result = await apiRequest('/products/1', {
+                method: 'PUT',
+                body: JSON.stringify({
+                    name: 'Produit Modifié',
+                    price: 6000
+                })
+            });
+            showResult('products-result', result, result.success);
+        }
+
+        async function testDeleteProduct() {
+            const result = await apiRequest('/products/2', {
+                method: 'DELETE'
+            });
+            showResult('products-result', result, result.success);
+        }
+
+        // Test des commandes
+        async function testGetOrders() {
+            const result = await apiRequest('/orders');
+            showResult('orders-result', result, result.success);
+        }
+
+        async function testUpdateOrderStatus() {
+            // D'abord créer une commande de test
+            const orderResult = await apiRequest('/orders', {
+                method: 'POST',
+                body: JSON.stringify({
+                    customer: { firstName: 'Test', lastName: 'User', phone: '0123456789' },
+                    total: 15000
+                })
+            });
+            
+            if (orderResult.success && orderResult.data.data) {
+                const orderId = orderResult.data.data._id;
+                const result = await apiRequest(`/admin/orders/${orderId}/status`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ status: 'confirmed' })
+                });
+                showResult('orders-result', result, result.success);
+            } else {
+                showResult('orders-result', orderResult, false);
+            }
+        }
+
+        async function testDeleteOrder() {
+            const result = await apiRequest('/orders/1', {
+                method: 'DELETE'
+            });
+            showResult('orders-result', result, result.success);
+        }
+
+        // Test initial
+        window.onload = function() {
+            testGetCategories();
+            testGetProducts();
+            testGetOrders();
+        };
+    </script>
+</body>
+</html>

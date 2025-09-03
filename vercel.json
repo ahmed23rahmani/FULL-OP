@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server-test-local.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "frontend/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/server-test-local.js"
+    },
+    {
+      "src": "/admin",
+      "dest": "/frontend/admin/index.html"
+    },
+    {
+      "src": "/",
+      "dest": "/frontend/client/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/$1"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "5000"
+  }
+}

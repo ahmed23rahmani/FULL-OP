@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ORIGINALE PLUS - Découvrez notre collection de chaussures et sacoches premium de luxe. Qualité exceptionnelle, style authentique.">
+    <meta name="keywords" content="chaussures, sacoches, premium, luxe, Algérie, mode">
+    <title>ORIGINALE PLUS - Chaussures & Sacoches Premium</title>
+     <link rel="stylesheet" href="/frontend/client/styles.css">
+    
+    <!-- Préchargement des ressources critiques -->
+    <link rel="preload" href="/frontend/client/styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style">
+    
+    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">OP</div>
+                <div class="logo-text">
+                    <h1>ORIGINALE PLUS</h1>
+                    <p>Chaussures & Sacoches Premium</p>
+                </div>
+            </div>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul>
+                    <li><a href="#home">Accueil</a></li>
+                    <li class="dropdown">
+                        <a href="#products">Produits <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="#" onclick="filterProducts('chaussures')">Chaussures</a>
+                            <a href="#" onclick="filterProducts('sacoches')">Sacoches</a>
+                            <a href="#" onclick="filterProducts('nouveautes')">Nouveautés</a>
+                            <a href="#" onclick="filterProducts('promotions')">Promotions</a>
+                        </div>
+                    </li>
+                                <li><a href="#about" onclick="showAbout()">À propos</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button class="search-btn" onclick="toggleSearch()" aria-label="Rechercher">
+                    <i class="fas fa-search"></i>
+                </button>
+            
+            <!-- Conteneur de recherche -->
+            <div id="search-container" class="search-container" style="display: none;">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Rechercher un produit..." onkeyup="searchProducts(this.value)">
+                    <button class="search-close" onclick="toggleSearch()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+                <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </button>
+                <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+            </header>
+        
+        <!-- Menu Mobile -->
+        <div class="mobile-menu" id="mobile-menu">
+            <ul>
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#" onclick="filterProducts('chaussures')">Chaussures</a></li>
+                <li><a href="#" onclick="filterProducts('sacoches')">Sacoches</a></li>
+                <li><a href="#" onclick="filterProducts('nouveautes')">Nouveautés</a></li>
+                <li><a href="#" onclick="filterProducts('promotions')">Promotions</a></li>
+                <li><a href="#about" onclick="showAbout()">À propos</a></li>
+            </ul>
+        </div>
+        
+        <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="delivery-message">
+                    <i class="fas fa-truck"></i>
+                    <span>Livraison gratuite à partir de 5000 DA</span>
+                </div>
+                <h2>Collection Premium 2024</h2>
+                <h1>Style <span class="highlight">Authentique</span><br>Qualité <span class="highlight">Exceptionnelle</span></h1>
+                <p>Découvrez notre sélection exclusive de chaussures et sacoches de luxe, conçues pour les connaisseurs qui ne transigent pas sur la qualité.</p>
+                <button class="cta-btn" onclick="scrollToProducts()">
+                    Découvrir la Collection
+                </button>
+            </div>
+            <div class="hero-image">
+                <div class="hero-product">
+                    <img src="https://www.sporsora.com/media/k2/items/cache/7e774c58eb70722e199d0b5cf7618026_XL.jpg" 
+                         alt="Chaussures Premium" 
+                         loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nos Catégories</h2>
+                <p>Explorez notre gamme complète de produits premium sélectionnés avec soin</p>
+            </div>
+            
+            <div class="category-grid">
+                <div class="category-card" onclick="filterProducts('chaussures')">
+                    <div class="category-image">
+                        <img src="https://dcdn-us.mitiendanube.com/stores/004/436/680/products/adidas-campus-00s-core-black-1-showroom_1-ab2faf376a78b37c0617117594129138-1024-1024.jpeg" 
+                             alt="Chaussures Premium" 
+                             loading="lazy">
+                    </div>
+                    <div class="category-content">
+                        <h3>Chaussures Premium</h3>
+                        <p>Collection exclusive de chaussures de luxe pour homme et femme</p>
+                        <a href="#products" class="category-btn">Découvrir</a>
+                    </div>
+                </div>
+                
+                <div class="category-card" onclick="filterProducts('sacoches')">
+                    <div class="category-image">
+                        <img src="https://images.napali.app/global/element-products/all/default/xlarge/elyba00105_element,w_fbk_frt1.jpg" 
+                             alt="Sacoches & Maroquinerie" 
+                             loading="lazy">
+                    </div>
+                    <div class="category-content">
+                        <h3>Sacoches</h3>
+                        <p>Sacs et accessoires véritable de première qualité</p>
+                        <a href="#products" class="category-btn">Découvrir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2>Produits Vedettes</h2>
+                <p>Sélection de nos meilleures pièces, alliant style contemporain et savoir-faire traditionnel</p>
+            </div>
+            
+            <div class="product-filters">
+                <button class="filter-btn active" onclick="filterProducts('all')">Tous</button>
+                <button class="filter-btn" onclick="filterProducts('chaussures')">Chaussures</button>
+                <button class="filter-btn" onclick="filterProducts('sacoches')">Sacoches</button>
+                <button class="filter-btn" onclick="filterProducts('nouveautes')">Nouveautés</button>
+                <button class="filter-btn" onclick="filterProducts('promotions')">Promotions</button>
+            </div>
+            
+            <div class="product-grid" id="product-grid">
+                <!-- Products will be dynamically loaded here -->
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Chargement des produits...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Panier</h3>
+            <button class="close-cart" onclick="closeCart()" aria-label="Fermer le panier">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="cart-content" id="cart-content">
+            <div class="cart-empty" id="cart-empty">
+                <i class="fas fa-shopping-bag"></i>
+                <p>Votre panier est vide</p>
+            </div>
+            
+            <div class="cart-items" id="cart-items" style="display: none;">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+        </div>
+        
+        <div class="cart-summary" id="cart-summary" style="display: none;">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount" id="total-amount">0 DA</span>
+            </div>
+            <button class="checkout-btn" onclick="showOrderModal()">
+                Commander Maintenant
+            </button>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div id="order-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeOrderModal()">&times;</span>
+            
+            <div class="modal-header">
+                <div class="modal-logo">
+                    <div class="modal-logo-icon">O+</div>
+                    <h2>ORIGINALE PLUS</h2>
+                </div>
+                <h3>Finaliser votre commande</h3>
+            </div>
+            
+            <form id="order-form" class="order-form">
+                <div class="form-section">
+                    <h4><i class="fas fa-user"></i> Informations personnelles</h4>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="firstName">Prénom *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Nom *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Adresse complète *</label>
+                        <textarea id="address" name="address" rows="3" required></textarea>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="city">Ville *</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="postalCode">Code postal</label>
+                            <input type="text" id="postalCode" name="postalCode">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4><i class="fas fa-truck"></i> Livraison</h4>
+                    <div class="delivery-options">
+                        <label class="radio-option">
+                            <input type="radio" name="delivery" value="standard" checked>
+                            <span class="radio-custom"></span>
+                            <div class="delivery-info">
+                                <strong>Livraison standard (3-5 jours)</strong>
+                                <span>500 DA - Gratuite à partir de 5000 DA</span>
+                            </div>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="delivery" value="express">
+                            <span class="radio-custom"></span>
+                            <div class="delivery-info">
+                                <strong>Livraison express (1-2 jours)</strong>
+                                <span>1000 DA</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4><i class="fas fa-credit-card"></i> Mode de paiement</h4>
+                    <div class="payment-options">
+                        <label class="radio-option">
+                            <input type="radio" name="payment" value="cod" checked>
+                            <span class="radio-custom"></span>
+                            <div class="payment-info">
+                                <strong>Paiement à la livraison</strong>
+                                <span>Payez en espèces à la réception</span>
+                            </div>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="payment" value="transfer">
+                            <span class="radio-custom"></span>
+                            <div class="payment-info">
+                                <strong>Virement bancaire</strong>
+                                <span>Paiement par virement avant expédition</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="notes">Notes de commande</label>
+                        <textarea id="notes" name="notes" rows="3" placeholder="Instructions spéciales, préférences de livraison..."></textarea>
+                    </div>
+                </div>
+
+                <div class="order-summary" id="modal-order-summary">
+                    <!-- Order summary will be displayed here -->
+                </div>
+
+                <button type="submit" class="submit-order-btn">
+                    <i class="fas fa-check"></i>
+                    Confirmer la commande
+                </button>
+            </form>
+        </div>
+    </div>
+
+   
+
+    <!-- Order Details Modal -->
+    <div id="order-details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeOrderDetailsModal()">&times;</span>
+            <div id="order-details-content">
+                <!-- Order details will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">O+</div>
+                        <div>
+                            <h4>ORIGINALE PLUS</h4>
+                            <p>Chaussures & Sacoches Premium</p>
+                        </div>
+                    </div>
+                    <p>Votre destination pour les chaussures et sacoches de luxe en Algérie. Qualité premium, style authentique.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Produits</h4>
+                    <ul>
+                        <li><a href="#">Chaussures Homme</a></li>
+                        <li><a href="#">Chaussures Femme</a></li>
+                        <li><a href="#">Sacoches Business</a></li>
+                        <li><a href="#">Sacs à Main</a></li>
+                        <li><a href="#">Nouveautés</a></li>
+                        <li><a href="#">Promotions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Service Client</h4>
+                    <ul>
+                        <li><a href="#">Guide des Tailles</a></li>
+                        <li><a href="#">Livraison & Retours</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Garantie Qualité</a></li>
+                        <li><a href="#">Entretien</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Alger, Algérie</li>
+                        <li><i class="fas fa-phone"></i> +213 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> contact@originaleplus.dz</li>
+                        <li><i class="fas fa-clock"></i> Lun-Sam: 9h-19h</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ORIGINALE PLUS. Tous droits réservés. | Développé avec ❤️ pour l'excellence</p>
+            </div>
+        </div>
+    </footer>
+
+   
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="/frontend/client/script.js"></script>
+</body>
+</html>
