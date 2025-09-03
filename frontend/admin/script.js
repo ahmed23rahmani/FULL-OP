@@ -1,5 +1,5 @@
-// Configuration API
-        const API_BASE_URL = 'http://localhost:5000/api';
+        // Configuration API
+        const API_BASE_URL = 'https://full-op.vercel.app/api';
 
         // Fonctions API
         async function apiRequest(endpoint, options = {}) {
@@ -759,5 +759,5 @@
         // Configuration pour le déploiement en production
         if (window.location.hostname !== 'localhost') {
             // En production, utiliser l'URL du backend déployé
-            window.API_BASE_URL = 'http://localhost:5000/api';
+            window.API_BASE_URL = 'https://full-op.vercel.app/api';
         }

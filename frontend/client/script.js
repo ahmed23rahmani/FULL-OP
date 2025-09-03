@@ -1,5 +1,5 @@
 // Configuration API
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'https://full-op.vercel.app/api';
 
 // Fonctions API
 async function apiRequest(endpoint, options = {}) {
